@@ -12,12 +12,14 @@ h1 { font-size: 36px; color: #D4A574; margin-bottom: 10px; border-bottom: 1px so
 h2 { font-size: 24px; color: #D4A574; margin: 40px 0 20px; }
 h3 { font-size: 18px; color: #D4A574; margin: 30px 0 15px; }
 p { margin: 15px 0; color: #ccc; }
+ul, ol { margin: 15px 0 15px 25px; color: #ccc; }
+li { margin: 8px 0; }
 table { width: 100%; border-collapse: collapse; margin: 20px 0; }
 th, td { border: 1px solid #333; padding: 12px 15px; text-align: left; }
 th { background: #1a1f26; color: #D4A574; }
 tr:nth-child(even) { background: #161b22; }
-pre { background: #161b22; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border: 1px solid #333; }
-code { background: #161b22; padding: 2px 6px; border-radius: 4px; color: #D4A574; }
+pre { background: #161b22; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border: 1px solid #333; font-size: 13px; }
+code { background: #161b22; padding: 2px 6px; border-radius: 4px; color: #D4A574; font-size: 13px; }
 .version { color: #888; font-size: 14px; margin-bottom: 30px; }
 .section { background: #161b22; border-radius: 12px; padding: 25px; margin: 20px 0; border: 1px solid #333; }
 .status-ok { color: #3fb950; }
@@ -25,6 +27,12 @@ code { background: #161b22; padding: 2px 6px; border-radius: 4px; color: #D4A574
 .status-bad { color: #f85149; }
 a { color: #58a6ff; text-decoration: none; }
 a:hover { text-decoration: underline; }
+.step { background: #1a1f26; border-radius: 8px; padding: 20px; margin: 15px 0; border-left: 3px solid #D4A574; }
+.step-num { display: inline-block; background: #D4A574; color: #0d1117; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: bold; margin-right: 10px; }
+.tip { background: rgba(63, 185, 80, 0.1); border: 1px solid #3fb950; border-radius: 8px; padding: 15px; margin: 15px 0; }
+.tip-title { color: #3fb950; font-weight: bold; margin-bottom: 5px; }
+.warn { background: rgba(210, 153, 34, 0.1); border: 1px solid #d29922; border-radius: 8px; padding: 15px; margin: 15px 0; }
+.warn-title { color: #d29922; font-weight: bold; margin-bottom: 5px; }
 </style>
 </head>
 <body>
@@ -37,8 +45,8 @@ a:hover { text-decoration: underline; }
 <p>OUNIN 独立站采用 <strong>前端与后端分离（Headless）</strong> 架构：</p>
 <pre>
 用户端
-├── https://ouninshop.com (Cloudflare Pages CDN)
-└── https://store.ouninshop.com (Cloudflare DNS → Shopify)
+├── https://ounsshop.com (Cloudflare Pages CDN)
+└── https://store.ounsshop.com (Cloudflare DNS → Shopify)
          ↓
 前端层：GitHub → Cloudflare Pages（纯 HTML/CSS/JS）
          ↓
@@ -48,8 +56,8 @@ a:hover { text-decoration: underline; }
 <h3>核心域名</h3>
 <table>
 <tr><th>域名</th><th>类型</th><th>说明</th></tr>
-<tr><td>ouninshop.com</td><td>前端（Cloudflare CDN）</td><td>主站入口</td></tr>
-<tr><td>store.ouninshop.com</td><td>后端（Shopify）</td><td>Shopify 商店</td></tr>
+<tr><td>ounsshop.com</td><td>前端（Cloudflare CDN）</td><td>品牌官网主站</td></tr>
+<tr><td>store.ounsshop.com</td><td>后端（Shopify）</td><td>Shopify 结算/支付</td></tr>
 </table>
 </div>
 
@@ -72,12 +80,17 @@ a:hover { text-decoration: underline; }
 <h3>2.3 Cloudflare Pages 项目</h3>
 <table>
 <tr><th>项目</th><th>内容</th></tr>
-<tr><td>生产域名</td><td>https://ouninshop.com</td></tr>
+<tr><td>生产域名</td><td>https://ounsshop.com</td></tr>
 <tr><td>自定义域名</td><td>ounsshop.com</td></tr>
 <tr><td>Zone ID</td><td>91403386245d57e972e35345052bba95</td></tr>
 <tr><td>Bot Fight Mode</td><td class="status-ok">✅ 已开启</td></tr>
 <tr><td>SSL/TLS</td><td class="status-ok">✅ 安全模式（Full）</td></tr>
 </table>
+
+<div class="tip">
+<div class="tip-title">💡 前端部署流程</div>
+<p>本地修改 → Git push → Cloudflare Pages 自动构建（约1-2分钟）→ 全球CDN生效</p>
+</div>
 </div>
 
 <div class="section">
@@ -117,6 +130,11 @@ a:hover { text-decoration: underline; }
 <tr><td>登录邮箱</td><td>ouunin2025@gmail.com</td></tr>
 </table>
 
+<div class="warn">
+<div class="warn-title">⚠️ 注意</div>
+<p>Email 登录（Social Login）已禁用，需用邮箱密码登录或手机号验证码登录。</p>
+</div>
+
 <h3>4.2 Cloudflare 仪表盘</h3>
 <table>
 <tr><th>项目</th><th>内容</th></tr>
@@ -131,7 +149,6 @@ a:hover { text-decoration: underline; }
 
 <h3>4.4 Google Search Console</h3>
 <p>登录地址：<a href="https://search.google.com/search-console">https://search.google.com/search-console</a></p>
-
 </div>
 
 <div class="section">
@@ -231,6 +248,171 @@ a:hover { text-decoration: underline; }
 <tr><td>Google Analytics</td><td><a href="https://analytics.google.com">https://analytics.google.com</a></td></tr>
 <tr><td>Google Search Console</td><td><a href="https://search.google.com/search-console">https://search.google.com/search-console</a></td></tr>
 </table>
+</div>
+
+<div class="section">
+<h2>十一、使用指南（操作手册）</h2>
+
+<h3>11.1 前端网站更新（修改 HTML/CSS/JS）</h3>
+
+<div class="step">
+<span class="step-num">1</span><strong>本地修改文件</strong>
+<p>在本地仓库 <code>C:\Users\Mayn\.openclaw\workspace\ounin-clone\</code> 中编辑相应文件</p>
+</div>
+
+<div class="step">
+<span class="step-num">2</span><strong>推送 GitHub</strong>
+</div>
+<pre>
+cd C:\Users\Mayn\.openclaw\workspace\ounin-clone
+git add .
+git commit -m "描述本次修改"
+git push
+</pre>
+
+<div class="step">
+<span class="step-num">3</span><strong>等待 Cloudflare Pages 自动部署</strong>
+<p>约 1-2 分钟后，新内容会在 <a href="https://ounsshop.com">ounsshop.com</a> 生效</p>
+</div>
+
+<div class="tip">
+<div class="tip-title">💡 Git 推送代理问题</div>
+<p>如果推送卡住，先取消代理：<br>
+<code>git config --global --unset http.proxy</code><br>
+推送完成后如需恢复代理，重新配置即可。</p>
+</div>
+
+<h3>11.2 Shopify 后台操作指南</h3>
+
+<h4>添加/编辑产品</h4>
+<ol>
+<li>登录 <a href="https://admin.shopify.com">https://admin.shopify.com</a></li>
+<li>左侧菜单点击 <strong>Products（产品）</strong></li>
+<li>点击 <strong>Add product（添加产品）</strong> 或选择已有产品编辑</li>
+<li>填写产品信息（标题、描述、价格、库存、图片）</li>
+<li>设置 SEO meta 标签（点击产品页面底部 Edit website SEO）</li>
+<li>点击 <strong>Save（保存）</strong></li>
+</ol>
+
+<h4>处理订单</h4>
+<ol>
+<li>登录 Shopify 后台</li>
+<li>左侧菜单点击 <strong>Orders（订单）</strong></li>
+<li>查看新订单状态（New / Unfulfilled / Fulfilled）</li>
+<li>点击订单号 → 查看详情 → 点击 <strong>Fulfill（发货）</strong></li>
+<li>打印运单或手动填写物流信息</li>
+</ol>
+
+<h4>查看销售数据</h4>
+<ol>
+<li>登录 Shopify 后台</li>
+<li>左侧菜单点击 <strong>Analytics（分析）</strong></li>
+<li>查看 Dashboard（概览）、Orders（订单）、Sessions（访问量）</li>
+<li>可按日/周/月筛选时间范围</li>
+</ol>
+
+<h3>11.3 Cloudflare Pages 部署管理</h3>
+
+<h4>查看部署状态</h4>
+<ol>
+<li>登录 <a href="https://dash.cloudflare.com">Cloudflare Dashboard</a></li>
+<li>选择 <strong>Workers & Pages</strong></li>
+<li>找到 ouni/ounin 项目</li>
+<li>查看 Deployment（部署）选项卡</li>
+</ol>
+
+<h4>手动触发重新部署</h4>
+<ol>
+<li>在 Cloudflare Pages 项目中</li>
+<li>点击 <strong>Deployments（部署）</strong></li>
+<li>选择最近的 deployment 点击 <strong>Retry deployment</strong></li>
+</ol>
+
+<h4>查看构建日志</h4>
+<ol>
+<li>点击某个 deployment</li>
+<li>选择 <strong>View logs（查看日志）</strong></li>
+<li>查看构建过程是否有错误</li>
+</ol>
+
+<div class="warn">
+<div class="warn-title">⚠️ 部署失败排查</div>
+<p>如果页面没有更新，检查：<br>
+1. GitHub 仓库是否有最新代码<br>
+2. Cloudflare Pages 是否有部署记录<br>
+3. 构建日志是否有报错（常见：文件路径错误、HTML语法错误）</p>
+</div>
+
+<h3>11.4 Google Analytics 流量查看</h3>
+
+<h4>查看核心指标</h4>
+<ol>
+<li>登录 <a href="https://analytics.google.com">GA4</a></li>
+<li>选择 ounsshop.com 对应的媒体资源</li>
+<li>首页查看：用户数、Session、跳出率、滚动深度</li>
+</ol>
+
+<h4>查看用户行为</h4>
+<ol>
+<li>左侧菜单 <strong>Reports（报告）</strong> → <strong>User overview（用户概览）</strong></li>
+<li>查看：设备分布、地理位置、用户生命周期</li>
+</ol>
+
+<h4>查看转化</h4>
+<ol>
+<li>左侧菜单 <strong>Conversions（转化）</strong></li>
+<li>如果配置了转化追踪，可查看目标完成情况</li>
+</ol>
+
+<h3>11.5 Google Search Console SEO 检查</h3>
+
+<h4>查看索引状态</h4>
+<ol>
+<li>登录 <a href="https://search.google.com/search-console">Search Console</a></li>
+<li>选择 ounsshop.com</li>
+<li>左侧 <strong>Pages（页面）</strong> → 查看已被收录的页面</li>
+</ol>
+
+<h4>提交 Sitemap</h4>
+<ol>
+<li>在 Search Console 左侧点击 <strong>Sitemaps（站点地图）</strong></li>
+<li>输入 <code>sitemap.xml</code> → 点击提交</li>
+</ol>
+
+<h4>查看关键词排名</h4>
+<ol>
+<li>左侧点击 <strong>Performance（效果）</strong></li>
+<li>查看：展示次数、点击次数、CTR、平均排名</li>
+<li>按页面/查询细分查看具体关键词表现</li>
+</ol>
+
+<h3>11.6 DNS 配置管理（Cloudflare）</h3>
+
+<h4>添加新的 DNS 记录</h4>
+<ol>
+<li>登录 <a href="https://dash.cloudflare.com">Cloudflare Dashboard</a></li>
+<li>选择域名 <strong>ounsshop.com</strong></li>
+<li>点击 <strong>DNS</strong> → <strong>Add record（添加记录）</strong></li>
+<li>选择类型（A / CNAME / TXT 等）</li>
+<li>填写名称和内容 → 保存</li>
+</ol>
+
+<h4>修改 SSL/TLS 设置</h4>
+<ol>
+<li>登录 Cloudflare Dashboard</li>
+<li>选择域名 → <strong>SSL/TLS</strong></li>
+<li>选择加密模式（Full 推荐）</li>
+</ol>
+
+<div class="tip">
+<div class="tip-title">💡 常用 DNS 记录类型</div>
+<ul>
+<li><strong>A 记录</strong>：将域名指向一个 IPv4 地址</li>
+<li><strong>CNAME</strong>：将域名指向另一个域名（如 store 指向 Shopify）</li>
+<li><strong>TXT</strong>：用于验证域名所有权（如 Google Search Console）</li>
+</ul>
+</div>
+
 </div>
 
 <p style="color:#666;margin-top:40px;border-top:1px solid #333;padding-top:20px;">
