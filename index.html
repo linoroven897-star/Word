@@ -3,519 +3,421 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OUNIN 2026 年度工作计划与目标</title>
+<title>OUNIN 独立站架构文档</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: #0d1117; color: #fff; padding: 40px 20px; line-height: 1.6; }
-.container { max-width: 950px; margin: 0 auto; }
-h1 { font-size: 40px; color: #D4A574; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 20px; }
-h2 { font-size: 26px; color: #D4A574; margin: 40px 0 20px; border-left: 4px solid #D4A574; padding-left: 15px; }
-h3 { font-size: 20px; color: #D4A574; margin: 30px 0 15px; }
-h4 { font-size: 16px; color: #fff; margin: 20px 0 10px; }
-p { margin: 12px 0; color: #ccc; }
-ul, ol { margin: 12px 0 12px 25px; color: #ccc; }
-li { margin: 6px 0; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 36px; color: #D4A574; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+h2 { font-size: 24px; color: #D4A574; margin: 40px 0 20px; }
+h3 { font-size: 18px; color: #D4A574; margin: 30px 0 15px; }
+p { margin: 15px 0; color: #ccc; }
+ul, ol { margin: 15px 0 15px 25px; color: #ccc; }
+li { margin: 8px 0; }
 table { width: 100%; border-collapse: collapse; margin: 20px 0; }
 th, td { border: 1px solid #333; padding: 12px 15px; text-align: left; }
 th { background: #1a1f26; color: #D4A574; }
 tr:nth-child(even) { background: #161b22; }
 pre { background: #161b22; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border: 1px solid #333; font-size: 13px; }
-code { background: #161b22; padding: 2px 6px; border-radius: 4px; color: #D4A574; }
+code { background: #161b22; padding: 2px 6px; border-radius: 4px; color: #D4A574; font-size: 13px; }
 .version { color: #888; font-size: 14px; margin-bottom: 30px; }
 .section { background: #161b22; border-radius: 12px; padding: 25px; margin: 20px 0; border: 1px solid #333; }
-.phase { background: #1a1f26; border-radius: 10px; padding: 20px; margin: 15px 0; border-left: 4px solid; }
-.phase-june { border-color: #f85149; }
-.phase-july { border-color: #d29922; }
-.phase-aug { border-color: #58a6ff; }
-.phase-sep { border-color: #a371f7; }
-.phase-oct { border-color: #3fb950; }
-.phase-nov { border-color: #39d353; }
-.phase-dec { border-color: #D4A574; }
-.phase-title { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
-.phase-date { font-size: 13px; color: #888; margin-bottom: 8px; }
 .status-ok { color: #3fb950; }
 .status-warn { color: #d29922; }
 .status-bad { color: #f85149; }
-.status-new { color: #58a6ff; }
 a { color: #58a6ff; text-decoration: none; }
 a:hover { text-decoration: underline; }
-.goal-box { background: linear-gradient(135deg, rgba(212,165,116,0.15), rgba(212,165,116,0.05)); border: 2px solid #D4A574; border-radius: 16px; padding: 30px; margin: 25px 0; text-align: center; }
-.goal-number { font-size: 48px; font-weight: bold; color: #D4A574; }
-.goal-label { font-size: 18px; color: #ccc; margin-top: 5px; }
-.goal-sub { font-size: 14px; color: #888; margin-top: 10px; }
-.kpi-table td:nth-child(2), .kpi-table td:nth-child(3), .kpi-table td:nth-child(4) { text-align: center; }
-.milestone { display: inline-block; background: rgba(63,185,80,0.15); border: 1px solid #3fb950; border-radius: 20px; padding: 4px 14px; font-size: 13px; color: #3fb950; margin: 3px; }
-.task { background: #0d1117; border-radius: 8px; padding: 12px 15px; margin: 8px 0; border: 1px solid #333; }
-.task-name { font-weight: bold; color: #fff; margin-bottom: 4px; }
-.task-desc { font-size: 13px; color: #888; }
-.task-priority { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: 8px; }
-.priority-high { background: rgba(248,81,73,0.2); color: #f85149; }
-.priority-med { background: rgba(210,153,34,0.2); color: #d29922; }
-.priority-low { background: rgba(88,166,255,0.2); color: #58a6ff; }
-.warning-box { background: rgba(210,153,34,0.1); border: 1px solid #d29922; border-radius: 8px; padding: 15px; margin: 15px 0; }
-.warning-title { color: #d29922; font-weight: bold; margin-bottom: 5px; }
-.monthly-target { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0; }
-.month-box { background: #1a1f26; border-radius: 10px; padding: 15px; text-align: center; border: 1px solid #333; }
-.month-name { font-size: 14px; color: #888; margin-bottom: 5px; }
-.month-rev { font-size: 22px; font-weight: bold; color: #D4A574; }
-.month-orders { font-size: 12px; color: #ccc; margin-top: 3px; }
+.step { background: #1a1f26; border-radius: 8px; padding: 20px; margin: 15px 0; border-left: 3px solid #D4A574; }
+.step-num { display: inline-block; background: #D4A574; color: #0d1117; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: bold; margin-right: 10px; }
+.tip { background: rgba(63, 185, 80, 0.1); border: 1px solid #3fb950; border-radius: 8px; padding: 15px; margin: 15px 0; }
+.tip-title { color: #3fb950; font-weight: bold; margin-bottom: 5px; }
+.warn { background: rgba(210, 153, 34, 0.1); border: 1px solid #d29922; border-radius: 8px; padding: 15px; margin: 15px 0; }
+.warn-title { color: #d29922; font-weight: bold; margin-bottom: 5px; }
 </style>
 </head>
 <body>
 <div class="container">
-<h1>OUNIN 2026 年度工作计划与目标</h1>
-<p class="version">制定日期：2026-05-12 | 目标年份：2026 | 版本：v1.0</p>
-
-<div class="goal-box">
-<div class="goal-number">$50,000 - $100,000</div>
-<div class="goal-label">年度营收目标（截至 2026年12月31日）</div>
-<div class="goal-sub">基于 6月启动线上营销的规划目标</div>
-</div>
+<h1>OUNIN 独立站架构文档</h1>
+<p class="version">文档版本：2026-05-12 | 最后更新：MiniMax-M2.7</p>
 
 <div class="section">
-<h2>一、现状分析</h2>
+<h2>一、整体架构概览</h2>
+<p>OUNIN 独立站采用 <strong>前端与后端分离（Headless）</strong> 架构：</p>
+<pre>
+用户端
+├── https://ounsshop.com (Cloudflare Pages CDN)
+└── https://store.ounsshop.com (Cloudflare DNS → Shopify)
+         ↓
+前端层：GitHub → Cloudflare Pages（纯 HTML/CSS/JS）
+         ↓
+后端层：Shopify（产品目录、订单、支付、税务）
+</pre>
 
-<h3>1.1 当前业务数据（截至2026年5月）</h3>
+<h3>核心域名</h3>
 <table>
-<tr><th>指标</th><th>当前值</th><th>说明</th></tr>
-<tr><td>月均收入</td><td class="status-warn">~$163 USD</td><td>30天数据，1个订单</td></tr>
-<tr><td>月均访客</td><td class="status-warn">~130 Sessions</td><td>Shopify 数据</td></tr>
-<tr><td>网站总用户</td><td class="status-ok">6,487</td><td>GA4 近90天</td></tr>
-<tr><td>转化率</td><td class="status-warn">0.76%</td><td>低于行业均值2-3%</td></tr>
-<tr><td>跳出率</td><td class="status-bad">67.21%</td><td>偏高，需优化</td></tr>
-<tr><td>平均会话时长</td><td class="status-warn">2分19秒</td><td>中等水平</td></tr>
-<tr><td>搜索展示</td><td class="status-bad">16次/7天</td><td>GSC 数据，极低</td></tr>
+<tr><th>域名</th><th>类型</th><th>说明</th></tr>
+<tr><td>ounsshop.com</td><td>前端（Cloudflare CDN）</td><td>品牌官网主站</td></tr>
+<tr><td>store.ounsshop.com</td><td>后端（Shopify）</td><td>Shopify 结算/支付</td></tr>
 </table>
+</div>
 
-<h3>1.2 差距分析</h3>
+<div class="section">
+<h2>二、前端架构</h2>
+
+<h3>2.1 技术栈</h3>
 <table>
-<tr><th>指标</th><th>当前值</th><th>目标值（年底）</th><th>需提升倍数</th></tr>
-<tr><td>月均收入</td><td>~$163</td><td>$7,000-$14,000</td><td class="status-bad">43-86x</td></tr>
-<tr><td>月订单量</td><td>~1</td><td>~50-100</td><td class="status-bad">50-100x</td></tr>
-<tr><td>月均流量</td><td>~130</td><td>~3,000-5,000</td><td class="status-bad">23-38x</td></tr>
-<tr><td>转化率</td><td>0.76%</td><td>2-3%</td><td class="status-warn">3-4x</td></tr>
-<tr><td>客单价</td><td>~$163</td><td>$200-$300</td><td class="status-warn">1.2-1.8x</td></tr>
+<tr><th>组件</th><th>技术</th><th>说明</th></tr>
+<tr><td>语言</td><td>HTML5 + CSS3 + Vanilla JS</td><td>无框架、无 CDN 依赖</td></tr>
+<tr><td>源码托管</td><td>GitHub</td><td>linoroven897-star/ounin</td></tr>
+<tr><td>CDN 分发</td><td>Cloudflare Pages</td><td>自动部署，边缘节点</td></tr>
+<tr><td>图片存储</td><td>GitHub 仓库内</td><td>assets/images/</td></tr>
 </table>
 
-<div class="warning-box">
-<div class="warning-title">⚠️ 关键挑战</div>
-<p>从当前 $163/月 提升到 $7,000-$14,000/月是一个巨大的跨越，需要在流量获取、转化优化、客单价提升等多个维度同时发力。6月份的准备工作至关重要。</p>
-</div>
-</div>
+<h3>2.2 GitHub 仓库</h3>
+<p>仓库地址：<a href="https://github.com/linoroven897-star/ounin">https://github.com/linoroven897-star/ounin</a></p>
+<p>部署方式：Cloudflare Pages 监听 GitHub，每次 push 自动部署 ✅ 已启用</p>
 
-<div class="section">
-<h2>二、年度目标分解</h2>
-
-<h3>2.1 月度收入目标</h3>
-<div class="monthly-target">
-<div class="month-box"><div class="month-name">6月</div><div class="month-rev">$300</div><div class="month-orders">~2-3单</div></div>
-<div class="month-box"><div class="month-name">7月</div><div class="month-rev">$800</div><div class="month-orders">~5-8单</div></div>
-<div class="month-box"><div class="month-name">8月</div><div class="month-rev">$1,500</div><div class="month-orders">~10-15单</div></div>
-<div class="month-box"><div class="month-name">9月</div><div class="month-rev">$3,000</div><div class="month-orders">~20-30单</div></div>
-</div>
-<div class="monthly-target">
-<div class="month-box"><div class="month-name">10月</div><div class="month-rev">$6,000</div><div class="month-orders">~40-60单</div></div>
-<div class="month-box"><div class="month-name">11月</div><div class="month-rev">$12,000</div><div class="month-orders">~80-120单</div></div>
-<div class="month-box"><div class="month-name">12月</div><div class="month-rev">$18,000+</div><div class="month-orders">~120-180单</div></div>
-<div class="month-box" style="background:rgba(212,165,116,0.1);border-color:#D4A574;"><div class="month-name">全年合计</div><div class="month-rev">$41,600+</div><div class="month-orders">目标 $50k-$100k</div></div>
-</div>
-
-<h3>2.2 关键里程碑</h3>
-<span class="milestone">6月初 基础设施就绪</span>
-<span class="milestone">7月1日 付费广告正式启动</span>
-<span class="milestone">8月1日 月收入突破 $1,500</span>
-<span class="milestone">9月1日 SEO 关键词开始有排名</span>
-<span class="milestone">10月1日 月收入突破 $6,000</span>
-<span class="milestone">11-12月 旺季冲刺，黑色星期五/圣诞</span>
-<span class="milestone">12月31日 年度目标达成</span>
-</div>
-
-<div class="section">
-<h2>三、阶段计划</h2>
-
-<div class="phase phase-june">
-<div class="phase-title">🔥 第一阶段：启动准备期（6月1日 - 6月30日）</div>
-<div class="phase-date">6月 | 目标收入：$300 | 核心：修复 + 准备 + 启动</div>
-
-<h4>本月重点任务</h4>
-<div class="task">
-<div class="task-name">1. 修复已知问题 <span class="task-priority priority-high">高优先级</span></div>
-<div class="task-desc">钉钉机器人 Token 失效修复 | Email 登录问题确认 | 所有技术债清理</div>
-</div>
-
-<div class="task">
-<div class="task-name">2. Google Analytics 4 深度配置</div>
-<div class="task-desc">设置转化追踪（Purchase、Signup、ViewProduct）| 配置增强型电子商务 | 创建自定义仪表盘</div>
-</div>
-
-<div class="task">
-<div class="task-name">3. SEO 基础优化</div>
-<div class="task-desc">提交 sitemap.xml 到 Search Console | 检查所有页面 meta 标签 | 创建 robots.txt | 修复 404 页面</div>
-</div>
-
-<div class="task">
-<div class="task-name">4. 独立站内容充实</div>
-<div class="task-desc">产品页增加评价内容 | 完善博客内容（至少 5 篇）| 添加 FAQ 页面 | 优化产品描述</div>
-</div>
-
-<div class="task">
-<div class="task-name">5. Google Ads 账号准备</div>
-<div class="task-desc">注册 Google Ads | 创建搜索广告系列 | 准备关键词列表 | 设计广告素材 | 设置转化追踪</div>
-</div>
-
-<div class="task">
-<div class="task-name">6. Facebook/Instagram Meta 账号准备</div>
-<div class="task-desc">创建 Business Manager | 配置 Pixel 追踪 | 创建广告账户 | 准备创意素材</div>
-</div>
-
-<div class="task">
-<div class="task-name">7. 邮件营销系统搭建</div>
-<div class="task-desc">选择邮件营销工具（Mailchimp/Klaviyo）| 配置邮件订阅弹窗 | 创建欢迎邮件序列 | 设置 abandoned cart 邮件</div>
-</div>
-
-<h4>验收标准</h4>
-<ul>
-<li>✅ 网站技术问题全部修复</li>
-<li>✅ GA4 转化追踪正常运行</li>
-<li>✅ Search Console 索引页面 > 20 个</li>
-<li>✅ Google Ads 账号可投放状态</li>
-<li>✅ 邮件营销系统正常运转</li>
-<li>✅ 至少 5 篇博客文章上线</li>
-</ul>
-</div>
-
-<div class="phase phase-july">
-<div class="phase-title">🚀 第二阶段：广告测试期（7月1日 - 7月31日）</div>
-<div class="phase-date">7月 | 目标收入：$800 | 核心：付费流量测试 + 数据收集</div>
-
-<h4>本月重点任务</h4>
-<div class="task">
-<div class="task-name">1. Google Ads 搜索广告启动</div>
-<div class="task-desc">预算：$500-$800/月 | 关键词：steam oven, air fry oven, countertop oven | 匹配类型：广泛+词组 | A/B 测试 2-3 套广告文案</div>
-</div>
-
-<div class="task">
-<div class="task-name">2. Facebook/Instagram 广告测试</div>
-<div class="task-desc">预算：$300-$500/月 | 目标：网站访客再营销 + 兴趣定向 | 测试 3-5 个受众群体 | 收集初期转化数据</div>
-</div>
-
-<div class="task">
-<div class="task-name">3. SEO 内容建设</div>
-<div class="task-desc">每周发布 1-2 篇博客 | 目标：覆盖长尾关键词 | 内部链接优化 | 图片 alt 标签完善</div>
-</div>
-
-<div class="task">
-<div class="task-name">4. 产品页转化率优化</div>
-<div class="task-desc">A/B 测试 CTA 按钮颜色/文案 | 添加信任徽章（安全标识、免费退货）| 优化产品图片展示 | 减少跳出率</div>
-</div>
-
-<div class="task">
-<div class="task-name">5. Klaviyo 邮件序列激活</div>
-<div class="task-desc">激活欢迎序列邮件 | 设置弃购挽回邮件（3封序列）| 创建首次购买感谢邮件 | 配置复购提醒邮件</div>
-</div>
-
-<h4>验收标准</h4>
-<ul>
-<li>✅ Google Ads 广告正常投放， CPA < $50</li>
-<li>✅ Facebook 广告正常投放，CPA < $30</li>
-<li>✅ 网站月 Sessions > 500</li>
-<li>✅ 转化率提升到 1.0%</li>
-<li>✅ 邮件订阅用户 > 100 人</li>
-</ul>
-</div>
-
-<div class="phase phase-aug">
-<div class="phase-title">📈 第三阶段：扩大投放期（8月1日 - 8月31日）</div>
-<div class="phase-date">8月 | 目标收入：$1,500 | 核心：扩大广告 + 优化转化</div>
-
-<h4>本月重点任务</h4>
-<div class="task">
-<div class="task-name">1. Google Ads 扩展</div>
-<div class="task-desc">预算提升到 $1,000-$1,500/月 | 添加展示广告系列 | 添加购物广告（Shopping）| 关键词扩展到 50+</div>
-</div>
-
-<div class="task">
-<div class="task-name">2. Facebook 广告规模化</div>
-<div class="task-desc">预算提升到 $800-$1,000/月 | Lookalike 受众 | 动态产品广告（DPA）| 再营销漏斗完善</div>
-</div>
-
-<div class="task">
-<div class="task-name">3. YouTube 视频广告测试</div>
-<div class="task-desc">制作产品展示视频（15-30秒）| 测试 TrueView 广告 | 预算：$200-$300/月 | 目标：品牌认知</div>
-</div>
-
-<div class="task">
-<div class="task-name">4. 网红营销启动</div>
-<div class="task-desc">寻找 3-5 个厨房/烹饪领域微型网红（1万-10万粉丝）| 产品置换合作 | 目标：10个帖文</div>
-</div>
-
-<div class="task">
-<div class="task-name">5. 转化率持续优化</div>
-<div class="task-desc">落地页 A/B 测试 | 购物车页面优化 | Checkout 流程简化 | 目标：转化率 1.5%</div>
-</div>
-
-<h4>验收标准</h4>
-<ul>
-<li>✅ Google Ads 月花费 > $1,000，CPA < $40</li>
-<li>✅ Facebook 月花费 > $800</li>
-<li>✅ 网站月 Sessions > 1,500</li>
-<li>✅ 转化率 > 1.5%</li>
-<li>✅ 至少有 1 个网红合作帖文发布</li>
-</ul>
-</div>
-
-<div class="phase phase-sep">
-<div class="phase-title">⚡ 第四阶段：快速增长期（9月1日 - 9月30日）</div>
-<div class="phase-date">9月 | 目标收入：$3,000 | 核心：爆量 + 优化 ROAS</div>
-
-<h4>本月重点任务</h4>
-<div class="task">
-<div class="task-name">1. 广告全面扩量</div>
-<div class="task-desc">Google Ads 预算：$1,500-$2,000/月 | Facebook 预算：$1,000-$1,500/月 | 开始盈利性投放</div>
-</div>
-
-<div class="task">
-<div class="task-name">2. SEO 成效显现</div>
-<div class="task-desc">目标关键词进入 Google 前3页 | 博客文章 > 20 篇 | 外链建设启动 | 自然搜索流量占比 > 15%</div>
-</div>
-
-<div class="task">
-<div class="task-name">3. TikTok 广告测试</div>
-<div class="task-desc">创建 TikTok 广告账户 | 测试 1-2 个广告系列 | 预算：$200-$300/月 | 针对 Z 世代/千禧一代</div>
-</div>
-
-<div class="task">
-<div class="task-name">4. 邮件营销自动化</div>
-<div class="task-desc">完善生命周期邮件序列 | 生日/周年邮件 | VIP 客户专属优惠 | 自动化工作流 > 5 个</div>
-</div>
-
-<div class="task">
-<div class="task-name">5. 客户评价收集</div>
-<div class="task-desc">发送评价请求邮件 | 在网站展示真实客户评价 | Google Business 评价 | Trustpilot 评价</div>
-</div>
-
-<h4>验收标准</h4>
-<ul>
-<li>✅ 月总收入 > $3,000</li>
-<li>✅ 广告 ROAS > 3:1</li>
-<li>✅ 邮件营销贡献 > 10% 收入</li>
-<li>✅ SEO 自然流量 > 200/月</li>
-</ul>
-</div>
-
-<div class="phase phase-oct">
-<div class="phase-title">🎯 第五阶段：旺季备战期（10月1日 - 10月31日）</div>
-<div class="phase-date">10月 | 目标收入：$6,000 | 核心：感恩节/黑五准备</div>
-
-<h4>本月重点任务</h4>
-<div class="task">
-<div class="task-name">1. 黑色星期五营销规划</div>
-<div class="task-desc">制定黑五促销方案（提前 3 周开始宣传）| 准备限时折扣码 | 创建倒计时 LP | 邮件营销黑五预告</div>
-</div>
-
-<div class="task">
-<div class="task-name">2. 广告预算大幅提升</div>
-<div class="task-desc">Google Ads 预算：$2,000-$3,000/月 | Facebook 预算：$1,500-$2,000/月 | 增加季节性关键词</div>
-</div>
-
-<div class="task">
-<div class="task-name">3. 库存与物流准备</div>
-<div class="task-desc">确认热销产品库存充足 | 备货 2-3 倍日常量 | 物流时效保障 | 准备延期发货预案</div>
-</div>
-
-<div class="task">
-<div class="task-name">4. 网站性能优化</div>
-<div class="task-desc">压力测试网站承载能力 | 优化页面加载速度 < 3 秒 | 移动端体验优化 | 准备候补服务器方案</div>
-</div>
-
-<div class="task">
-<div class="task-name">5. 内容营销冲刺</div>
-<div class="task-desc">发布 "Gift Guide" 类博客 | 产品对比内容 | 节日装饰/礼品推荐 | 提前布局节日搜索词</div>
-</div>
-
-<h4>验收标准</h4>
-<ul>
-<li>✅ 黑五促销方案确定</li>
-<li>✅ 库存准备就绪</li>
-<li>✅ 月总收入 > $6,000</li>
-<li>✅ 网站可应对 5 倍日常流量</li>
-</ul>
-</div>
-
-<div class="phase phase-nov">
-<div class="phase-title">🛒 第六阶段：旺季爆发期（11月1日 - 11月30日）</div>
-<div class="phase-date">11月 | 目标收入：$12,000 | 核心：黑色星期五 + 网络星期一</div>
-
-<h4>本月重点任务</h4>
-<div class="task">
-<div class="task-name">1. 黑色星期五执行</div>
-<div class="task-desc">11月第四周五全面启动促销 | 全站 20-30% 折扣 | 24 小时闪购 | 广告预算翻倍</div>
-</div>
-
-<div class="task">
-<div class="task-name">2. 网络星期一跟进</div>
-<div class="task-desc">黑五结束后无缝衔接网一 | 延长促销 3-5 天 | 邮件营销持续发力</div>
-</div>
-
-<div class="task">
-<div class="task-name">3. 广告投放最大化</div>
-<div class="task-desc">Google Ads 预算：$3,000-$5,000/月 | Facebook 预算：$2,000-$3,000/月 | 全渠道覆盖</div>
-</div>
-
-<div class="task">
-<div class="task-name">4. 客服与物流高峰应对</div>
-<div class="task-desc">客服响应时间 < 2 小时 | 物流每日发货 | 订单状态实时更新 | 客诉快速处理</div>
-</div>
-
-<h4>验收标准</h4>
-<ul>
-<li>✅ 黑五当日收入 > $3,000</li>
-<li>✅ 月总收入 > $12,000</li>
-<li>✅ 订单履行率 > 95%</li>
-</ul>
-</div>
-
-<div class="phase phase-dec">
-<div class="phase-title">🎉 第七阶段：年末收官期（12月1日 - 12月31日）</div>
-<div class="phase-date">12月 | 目标收入：$18,000+ | 核心：圣诞/新年冲刺 + 年终总结</div>
-
-<h4>本月重点任务</h4>
-<div class="task">
-<div class="task-name">1. 圣诞新年促销</div>
-<div class="task-desc">继续节日促销活动 | 礼盒套装推广 | 最后一搏清库存 | 节日专属折扣码</div>
-</div>
-
-<div class="task">
-<div class="task-name">2. 年度复盘</div>
-<div class="task-desc">收集全年数据 | 分析各渠道 ROI | 总结成功/失败经验 | 制定 2027 年规划</div>
-</div>
-
-<div class="task">
-<div class="task-name">3. 客户关系维护</div>
-<div class="task-desc">发送节日问候邮件 | 感谢复购客户 | 收集年末评价 | 建立客户档案</div>
-</div>
-
-<div class="task">
-<div class="task-name">4. 2027 年预算规划</div>
-<div class="task-desc">制定新年预算 | 规划新渠道测试 | 产品线扩展计划 | 团队扩张评估</div>
-</div>
-
-<h4>验收标准</h4>
-<ul>
-<li>✅ 年度总收入达到 $50,000-$100,000</li>
-<li>✅ 全年订单数 > 500</li>
-<li>✅ 客户满意度 > 90%</li>
-<li>✅ 完成 2026 年度复盘报告</li>
-</ul>
-</div>
-</div>
-
-<div class="section">
-<h2>四、渠道预算分配</h2>
+<h3>2.3 Cloudflare Pages 项目</h3>
 <table>
-<tr><th>渠道</th><th>月度预算</th><th>占比</th><th>预期 ROI</th><th>优先级</th></tr>
-<tr><td>Google Ads（搜索+购物）</td><td>$1,500-$3,000</td><td>40-50%</td><td>3-5x</td><td class="status-ok">⭐⭐⭐</td></tr>
-<tr><td>Facebook/Instagram</td><td>$1,000-$2,000</td><td>30-35%</td><td>2-4x</td><td class="status-ok">⭐⭐⭐</td></tr>
-<tr><td>YouTube Ads</td><td>$300-$500</td><td>8-10%</td><td>1.5-3x</td><td class="status-warn">⭐⭐</td></tr>
-<tr><td>TikTok Ads</td><td>$200-$400</td><td>5-8%</td><td>1-2x</td><td class="status-warn">⭐⭐</td></tr>
-<tr><td>网红/KOL 合作</td><td>$200-$500</td><td>5-10%</td><td>2-5x</td><td class="status-warn">⭐⭐</td></tr>
-<tr><td>邮件营销工具</td><td>$50-$100</td><td>2-3%</td><td>5-10x</td><td class="status-ok">⭐⭐⭐</td></tr>
-<tr><td>SEO/内容创作</td><td>$200-$400</td><td>5-8%</td><td>3-8x</td><td class="status-ok">⭐⭐⭐</td></tr>
-<tr><td><strong>月度总预算</strong></td><td><strong>$3,500-$7,000</strong></td><td>100%</td><td><strong>平均 3-4x</strong></td><td></td></tr>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>生产域名</td><td>https://ounsshop.com</td></tr>
+<tr><td>自定义域名</td><td>ounsshop.com</td></tr>
+<tr><td>Zone ID</td><td>91403386245d57e972e35345052bba95</td></tr>
+<tr><td>Bot Fight Mode</td><td class="status-ok">✅ 已开启</td></tr>
+<tr><td>SSL/TLS</td><td class="status-ok">✅ 安全模式（Full）</td></tr>
 </table>
 
-<div class="warning-box">
-<div class="warning-title">⚠️ 预算说明</div>
-<p>以上预算为 9-12 月旺季预算（扩量期），6-8 月测试期预算约为上述的 40-60%。全年广告总花费预算约 $30,000-$50,000。</p>
+<div class="tip">
+<div class="tip-title">💡 前端部署流程</div>
+<p>本地修改 → Git push → Cloudflare Pages 自动构建（约1-2分钟）→ 全球CDN生效</p>
 </div>
 </div>
 
 <div class="section">
-<h2>五、关键成功指标（KPI）</h2>
+<h2>三、后端架构</h2>
 
-<h3>5.1 核心 KPI 追踪表</h3>
-<table class="kpi-table">
-<tr><th>指标</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th><th>10月</th><th>11月</th><th>12月</th></tr>
-<tr><td>月收入目标</td><td>$300</td><td>$800</td><td>$1,500</td><td>$3,000</td><td>$6,000</td><td>$12,000</td><td>$18,000</td></tr>
-<tr><td>月订单数</td><td>2-3</td><td>5-8</td><td>10-15</td><td>20-30</td><td>40-60</td><td>80-120</td><td>120-180</td></tr>
-<tr><td>月 Sessions</td><td>500</td><td>800</td><td>1,500</td><td>3,000</td><td>5,000</td><td>8,000</td><td>12,000</td></tr>
-<tr><td>转化率</td><td>1.0%</td><td>1.2%</td><td>1.5%</td><td>2.0%</td><td>2.0%</td><td>2.0%</td><td>2.0%</td></tr>
-<tr><td>客单价</td><td>$150</td><td>$160</td><td>$170</td><td>$180</td><td>$190</td><td>$200</td><td>$210</td></tr>
-<tr><td>广告 ROAS</td><td>2x</td><td>2.5x</td><td>3x</td><td>3x</td><td>3.5x</td><td>4x</td><td>4x</td></tr>
-<tr><td>邮件订阅用户</td><td>100</td><td>250</td><td>500</td><td>800</td><td>1,200</td><td>1,800</td><td>2,500</td></tr>
-</table>
+<h3>3.1 Shopify 商店</h3>
+<p>后台地址：<a href="https://admin.shopify.com">https://admin.shopify.com</a> → 登录后进入</p>
+<p>商店域名：ouunin.myshopify.com</p>
 
-<h3>5.2 渠道健康度指标</h3>
-<table>
-<tr><th>渠道</th><th>健康值</th><th>预警值</th></tr>
-<tr><td>Google Ads CPA</td><td>< $40</td><td>> $60</td></tr>
-<tr><td>Facebook CPA</td><td>< $30</td><td>> $50</td></tr>
-<tr><td>网站跳出率</td><td>< 55%</td><td>> 70%</td></tr>
-<tr><td>邮件打开率</td><td>> 25%</td><td>< 15%</td></tr>
-<tr><td>邮件点击率</td><td>> 3%</td><td>< 1.5%</td></tr>
-<tr><td>复购率</td><td>> 10%</td><td>< 5%</td></tr>
-</table>
-</div>
-
-<div class="section">
-<h2>六、风险与应对</h2>
-<table>
-<tr><th>风险</th><th>概率</th><th>影响</th><th>应对措施</th></tr>
-<tr><td>广告账号被封</td><td>中</td><td>高</td><td>多账户分散风险，准备备用广告账户，确保合规</td></tr>
-<tr><td>物流延误/爆仓</td><td>高</td><td>中</td><td>提前备货，多物流渠道，准备延期发货话术</td></tr>
-<tr><td>汇率波动</td><td>中</td><td>中</td><td>定价考虑缓冲空间，关注汇率变化及时调整</td></tr>
-<tr><td>竞争对手价格战</td><td>中</td><td>中</td><td>差异化产品，突出品牌价值，强化服务</td></tr>
-<tr><td>网站流量暴增崩溃</td><td>低</td><td>高</td><td>提前压力测试，准备 CDN 限流方案</td></tr>
-<tr><td>产品缺货</td><td>高</td><td>高</td><td>安全库存设置 3 周，提前补货预测</td></tr>
-<tr><td>付费广告成本上涨</td><td>高</td><td>中</td><td>多渠道分散，SEO 持续投入降低对付费依赖</td></tr>
-</table>
-</div>
-
-<div class="section">
-<h2>七、必备工具与资源</h2>
-<table>
-<tr><th>类别</th><th>工具</th><th>用途</th></tr>
-<tr><td>广告投放</td><td>Google Ads, Meta Ads Manager, TikTok Ads</td><td>付费流量</td></tr>
-<tr><td>数据分析</td><td>Google Analytics 4, Google Tag Manager</td><td>追踪/归因</td></tr>
-<tr><td>SEO</td><td>Google Search Console, Ahrefs/Moz, SurferSEO</td><td>搜索优化</td></tr>
-<tr><td>邮件营销</td><td>Klaviyo / Mailchimp</td><td>自动化营销</td></tr>
-<tr><td>社交管理</td><td>Later / Buffer / Meta Business Suite</td><td>内容排期</td></tr>
-<tr><td>客服</td><td>Gorgias / Zendesk</td><td>工单管理</td></tr>
-<tr><td>财务管理</td><td>Shopify Analytics, Google Sheets</td><td>收入追踪</td></tr>
-</table>
-</div>
-
-<div class="section">
-<h2>八、总结</h2>
-
-<div class="goal-box">
-<div class="goal-number">从 $163 → $50,000-$100,000</div>
-<div class="goal-label">全年营收增长目标</div>
-<div class="goal-sub">需要 300-600 倍的增长，核心路径：流量 x 转化 x 客单价</div>
-</div>
-
-<p>这是一个极具挑战性的目标。达成路径：</p>
+<h3>3.2 Headless 模式说明</h3>
+<p>当前 Shopify 已切换为 <strong>Headless（无头电商）模式</strong>：</p>
 <ul>
-<li><strong>流量提升</strong>：从 ~130/月 提升到 ~12,000/月（92x）</li>
-<li><strong>转化优化</strong>：从 0.76% 提升到 2%（2.6x）</li>
-<li><strong>客单价提升</strong>：从 ~$163 提升到 ~$210（1.3x）</li>
+<li>前端完全由自建静态站接管</li>
+<li>Shopify 仅作为后端服务（产品目录、购物车、结算、支付、订单管理、税务）</li>
 </ul>
 
-<p>6 月是成败关键——准备工作做得越充分，下半年爆发力越强。</p>
+<h3>3.3 Shopify 功能模块</h3>
+<table>
+<tr><th>模块</th><th>状态</th><th>说明</th></tr>
+<tr><td>产品目录</td><td class="status-ok">✅</td><td>5个产品，75个变体</td></tr>
+<tr><td>Checkout</td><td class="status-ok">✅</td><td>已配置，客户信息字段完整</td></tr>
+<tr><td>支付（Payments）</td><td class="status-warn">⚠️ 部分</td><td>PayPal 已接入（Partially active），Shopify Payments 未开通</td></tr>
+<tr><td>税务（Tax Services）</td><td class="status-ok">✅</td><td>已启用，支持13个国家/地区</td></tr>
+<tr><td>域名（Domains）</td><td class="status-ok">✅</td><td>4个域名全部 Connected</td></tr>
+<tr><td>邮件（Email）</td><td class="status-warn">⚠️</td><td>Email 登录已禁用</td></tr>
+</table>
+</div>
 
-<div class="warning-box">
-<div class="warning-title">🎯 核心建议</div>
-<p>1. <strong>6 月不要急于投广告</strong>，先把网站基础设施和追踪做好<br>
-2. <strong>7-8 月小预算测试</strong>，找到有效的广告素材和受众<br>
-3. <strong>9 月开始规模化</strong>，把预算集中到效果最好的渠道<br>
-4. <strong>旺季（11-12 月）是决胜关键</strong>，做好充分准备全力冲刺</p>
+<div class="section">
+<h2>四、各管理后台登录方式</h2>
+
+<h3>4.1 Shopify 商店后台</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>后台地址</td><td>https://admin.shopify.com 或 https://ouunin.myshopify.com/admin</td></tr>
+<tr><td>登录方式</td><td>Email / 手机号 + 密码</td></tr>
+<tr><td>登录邮箱</td><td>ouunin2025@gmail.com</td></tr>
+</table>
+
+<div class="warn">
+<div class="warn-title">⚠️ 注意</div>
+<p>Email 登录（Social Login）已禁用，需用邮箱密码登录或手机号验证码登录。</p>
+</div>
+
+<h3>4.2 Cloudflare 仪表盘</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>登录地址</td><td>https://dash.cloudflare.com</td></tr>
+<tr><td>接入域名</td><td>ounsshop.com（Zone ID: 91403386245d57e972e35345052bba95）</td></tr>
+<tr><td>主要功能</td><td>DNS 管理、SSL/TLS 配置、Pages 项目、安全设置</td></tr>
+</table>
+
+<h3>4.3 Google Analytics</h3>
+<p>登录地址：<a href="https://analytics.google.com">https://analytics.google.com</a></p>
+<p>追踪范围：全站流量、用户行为、转化追踪</p>
+
+<h3>4.4 Google Search Console</h3>
+<p>登录地址：<a href="https://search.google.com/search-console">https://search.google.com/search-console</a></p>
+</div>
+
+<div class="section">
+<h2>五、当前业务数据摘要</h2>
+<p>数据来源：2026-05-11 运营报告</p>
+
+<h3>5.1 流量（近90天，GA4）</h3>
+<table>
+<tr><th>指标</th><th>数值</th></tr>
+<tr><td>Sessions</td><td>295</td></tr>
+<tr><td>Total Users</td><td>6,487</td></tr>
+<tr><td>Engagement Rate</td><td>4.55%</td></tr>
+<tr><td>平均每次会话浏览页数</td><td>4.48</td></tr>
+<tr><td>跳出率</td><td>67.21%</td></tr>
+<tr><td>平均会话时长</td><td>2分19秒</td></tr>
+</table>
+
+<h3>5.2 搜索表现（近7天，GSC）</h3>
+<table>
+<tr><th>指标</th><th>数值</th></tr>
+<tr><td>总展示次数</td><td>16</td></tr>
+<tr><td>总点击次数</td><td>205</td></tr>
+<tr><td>平均 CTR</td><td>7.8%</td></tr>
+</table>
+
+<h3>5.3 销售数据（近30天，Shopify）</h3>
+<table>
+<tr><th>指标</th><th>数值</th></tr>
+<tr><td>Sessions</td><td>130</td></tr>
+<tr><td>Total Sales</td><td>$163 USD</td></tr>
+<tr><td>Orders</td><td>1</td></tr>
+<tr><td>Conversion Rate</td><td>0.76%</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>六、域名与 DNS 配置</h2>
+<table>
+<tr><th>类型</th><th>名称</th><th>内容</th><th>说明</th></tr>
+<tr><td>CNAME</td><td>store</td><td>指向 ouunin.myshopify.com</td><td>Shopify 商店</td></tr>
+</table>
+<p>主 DNS：Cloudflare | Zone ID：91403386245d57e972e35345052bba95</p>
+</div>
+
+<div class="section">
+<h2>七、支付与税务配置</h2>
+<table>
+<tr><th>项目</th><th>状态</th><th>说明</th></tr>
+<tr><td>PayPal</td><td class="status-warn">⚠️ Partially Active</td><td>2% 手续费，Checkout 支付</td></tr>
+<tr><td>Shopify Payments</td><td class="status-bad">❌ 未开通</td><td>—</td></tr>
+<tr><td>Shopify Tax Services</td><td class="status-ok">✅ 已启用</td><td>支持13个国家/地区</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>八、运营注意事项</h2>
+
+<h3>8.1 已发现问题</h3>
+<table>
+<tr><th>问题</th><th>说明</th><th>状态</th></tr>
+<tr><td>钉钉机器人 Token 失效</td><td>通知无法送达，Token 已失效超过26天</td><td class="status-warn">⚠️ 待修复</td></tr>
+<tr><td>Email 登录禁用</td><td>Shopify 后台 Email 登录方式已禁用</td><td class="status-warn">⚠️ 需确认</td></tr>
+</table>
+
+<h3>8.2 日常维护检查清单</h3>
+<table>
+<tr><th>检查项</th><th>频率</th><th>工具</th></tr>
+<tr><td>网站是否可以正常访问</td><td>每天</td><td>浏览器直接访问</td></tr>
+<tr><td>是否有新订单</td><td>每天</td><td>Shopify 后台</td></tr>
+<tr><td>流量数据变化</td><td>每周</td><td>Google Analytics</td></tr>
+<tr><td>搜索排名变化</td><td>每周</td><td>Google Search Console</td></tr>
+<tr><td>SSL 证书状态</td><td>每周</td><td>Cloudflare 仪表盘</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>九、相关账号汇总</h2>
+<table>
+<tr><th>平台</th><th>账号/邮箱</th><th>备注</th></tr>
+<tr><td>Shopify</td><td>ouunin2025@gmail.com</td><td>商店后台</td></tr>
+<tr><td>Cloudflare</td><td>（需向用户确认）</td><td>DNS + Pages</td></tr>
+<tr><td>GitHub</td><td>linoroven897-star</td><td>源码仓库</td></tr>
+<tr><td>Google Analytics</td><td>（需向用户确认）</td><td>流量分析</td></tr>
+<tr><td>Google Search Console</td><td>（需向用户确认）</td><td>SEO</td></tr>
+<tr><td>PayPal</td><td>（需向用户确认）</td><td>收款</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>十、常用链接</h2>
+<table>
+<tr><th>服务</th><th>链接</th></tr>
+<tr><td>商店前台</td><td><a href="https://ounsshop.com">https://ounsshop.com</a></td></tr>
+<tr><td>Shopify 后台</td><td><a href="https://admin.shopify.com">https://admin.shopify.com</a></td></tr>
+<tr><td>Cloudflare Dashboard</td><td><a href="https://dash.cloudflare.com">https://dash.cloudflare.com</a></td></tr>
+<tr><td>GitHub 仓库</td><td><a href="https://github.com/linoroven897-star/ounin">https://github.com/linoroven897-star/ounin</a></td></tr>
+<tr><td>Google Analytics</td><td><a href="https://analytics.google.com">https://analytics.google.com</a></td></tr>
+<tr><td>Google Search Console</td><td><a href="https://search.google.com/search-console">https://search.google.com/search-console</a></td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>十一、使用指南（操作手册）</h2>
+
+<h3>11.1 前端网站更新（修改 HTML/CSS/JS）</h3>
+
+<div class="step">
+<span class="step-num">1</span><strong>本地修改文件</strong>
+<p>在本地仓库 <code>C:\Users\Mayn\.openclaw\workspace\ounin-clone\</code> 中编辑相应文件</p>
+</div>
+
+<div class="step">
+<span class="step-num">2</span><strong>推送 GitHub</strong>
+</div>
+<pre>
+cd C:\Users\Mayn\.openclaw\workspace\ounin-clone
+git add .
+git commit -m "描述本次修改"
+git push
+</pre>
+
+<div class="step">
+<span class="step-num">3</span><strong>等待 Cloudflare Pages 自动部署</strong>
+<p>约 1-2 分钟后，新内容会在 <a href="https://ounsshop.com">ounsshop.com</a> 生效</p>
+</div>
+
+<div class="tip">
+<div class="tip-title">💡 Git 推送代理问题</div>
+<p>如果推送卡住，先取消代理：<br>
+<code>git config --global --unset http.proxy</code><br>
+推送完成后如需恢复代理，重新配置即可。</p>
+</div>
+
+<h3>11.2 Shopify 后台操作指南</h3>
+
+<h4>添加/编辑产品</h4>
+<ol>
+<li>登录 <a href="https://admin.shopify.com">https://admin.shopify.com</a></li>
+<li>左侧菜单点击 <strong>Products（产品）</strong></li>
+<li>点击 <strong>Add product（添加产品）</strong> 或选择已有产品编辑</li>
+<li>填写产品信息（标题、描述、价格、库存、图片）</li>
+<li>设置 SEO meta 标签（点击产品页面底部 Edit website SEO）</li>
+<li>点击 <strong>Save（保存）</strong></li>
+</ol>
+
+<h4>处理订单</h4>
+<ol>
+<li>登录 Shopify 后台</li>
+<li>左侧菜单点击 <strong>Orders（订单）</strong></li>
+<li>查看新订单状态（New / Unfulfilled / Fulfilled）</li>
+<li>点击订单号 → 查看详情 → 点击 <strong>Fulfill（发货）</strong></li>
+<li>打印运单或手动填写物流信息</li>
+</ol>
+
+<h4>查看销售数据</h4>
+<ol>
+<li>登录 Shopify 后台</li>
+<li>左侧菜单点击 <strong>Analytics（分析）</strong></li>
+<li>查看 Dashboard（概览）、Orders（订单）、Sessions（访问量）</li>
+<li>可按日/周/月筛选时间范围</li>
+</ol>
+
+<h3>11.3 Cloudflare Pages 部署管理</h3>
+
+<h4>查看部署状态</h4>
+<ol>
+<li>登录 <a href="https://dash.cloudflare.com">Cloudflare Dashboard</a></li>
+<li>选择 <strong>Workers & Pages</strong></li>
+<li>找到 ouni/ounin 项目</li>
+<li>查看 Deployment（部署）选项卡</li>
+</ol>
+
+<h4>手动触发重新部署</h4>
+<ol>
+<li>在 Cloudflare Pages 项目中</li>
+<li>点击 <strong>Deployments（部署）</strong></li>
+<li>选择最近的 deployment 点击 <strong>Retry deployment</strong></li>
+</ol>
+
+<h4>查看构建日志</h4>
+<ol>
+<li>点击某个 deployment</li>
+<li>选择 <strong>View logs（查看日志）</strong></li>
+<li>查看构建过程是否有错误</li>
+</ol>
+
+<div class="warn">
+<div class="warn-title">⚠️ 部署失败排查</div>
+<p>如果页面没有更新，检查：<br>
+1. GitHub 仓库是否有最新代码<br>
+2. Cloudflare Pages 是否有部署记录<br>
+3. 构建日志是否有报错（常见：文件路径错误、HTML语法错误）</p>
+</div>
+
+<h3>11.4 Google Analytics 流量查看</h3>
+
+<h4>查看核心指标</h4>
+<ol>
+<li>登录 <a href="https://analytics.google.com">GA4</a></li>
+<li>选择 ounsshop.com 对应的媒体资源</li>
+<li>首页查看：用户数、Session、跳出率、滚动深度</li>
+</ol>
+
+<h4>查看用户行为</h4>
+<ol>
+<li>左侧菜单 <strong>Reports（报告）</strong> → <strong>User overview（用户概览）</strong></li>
+<li>查看：设备分布、地理位置、用户生命周期</li>
+</ol>
+
+<h4>查看转化</h4>
+<ol>
+<li>左侧菜单 <strong>Conversions（转化）</strong></li>
+<li>如果配置了转化追踪，可查看目标完成情况</li>
+</ol>
+
+<h3>11.5 Google Search Console SEO 检查</h3>
+
+<h4>查看索引状态</h4>
+<ol>
+<li>登录 <a href="https://search.google.com/search-console">Search Console</a></li>
+<li>选择 ounsshop.com</li>
+<li>左侧 <strong>Pages（页面）</strong> → 查看已被收录的页面</li>
+</ol>
+
+<h4>提交 Sitemap</h4>
+<ol>
+<li>在 Search Console 左侧点击 <strong>Sitemaps（站点地图）</strong></li>
+<li>输入 <code>sitemap.xml</code> → 点击提交</li>
+</ol>
+
+<h4>查看关键词排名</h4>
+<ol>
+<li>左侧点击 <strong>Performance（效果）</strong></li>
+<li>查看：展示次数、点击次数、CTR、平均排名</li>
+<li>按页面/查询细分查看具体关键词表现</li>
+</ol>
+
+<h3>11.6 DNS 配置管理（Cloudflare）</h3>
+
+<h4>添加新的 DNS 记录</h4>
+<ol>
+<li>登录 <a href="https://dash.cloudflare.com">Cloudflare Dashboard</a></li>
+<li>选择域名 <strong>ounsshop.com</strong></li>
+<li>点击 <strong>DNS</strong> → <strong>Add record（添加记录）</strong></li>
+<li>选择类型（A / CNAME / TXT 等）</li>
+<li>填写名称和内容 → 保存</li>
+</ol>
+
+<h4>修改 SSL/TLS 设置</h4>
+<ol>
+<li>登录 Cloudflare Dashboard</li>
+<li>选择域名 → <strong>SSL/TLS</strong></li>
+<li>选择加密模式（Full 推荐）</li>
+</ol>
+
+<div class="tip">
+<div class="tip-title">💡 常用 DNS 记录类型</div>
+<ul>
+<li><strong>A 记录</strong>：将域名指向一个 IPv4 地址</li>
+<li><strong>CNAME</strong>：将域名指向另一个域名（如 store 指向 Shopify）</li>
+<li><strong>TXT</strong>：用于验证域名所有权（如 Google Search Console）</li>
+</ul>
+</div>
+
 </div>
 
 <p style="color:#666;margin-top:40px;border-top:1px solid #333;padding-top:20px;">
-本文档由 AI 根据 2026-05-12 当前状态制定 | 目标：2026 年年底营收 $50,000-$100,000 | 制定人：MiniMax-M2.7
+本文档由 AI 根据 2026-05-12 当前状态生成，如有任何变更请手动更新。
 </p>
-</div>
-
 </div>
 </body>
 </html>
