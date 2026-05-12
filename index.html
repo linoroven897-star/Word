@@ -38,7 +38,6 @@ a:hover { text-decoration: underline; }
 <pre>
 用户端
 ├── https://ouninshop.com (Cloudflare Pages CDN)
-├── https://ouninglobal.com (Cloudflare DNS + Pages)
 └── https://store.ouninshop.com (Cloudflare DNS → Shopify)
          ↓
 前端层：GitHub → Cloudflare Pages（纯 HTML/CSS/JS）
@@ -50,9 +49,7 @@ a:hover { text-decoration: underline; }
 <table>
 <tr><th>域名</th><th>类型</th><th>说明</th></tr>
 <tr><td>ouninshop.com</td><td>前端（Cloudflare CDN）</td><td>主站入口</td></tr>
-<tr><td>ouninglobal.com</td><td>前端（Cloudflare DNS）</td><td>品牌官网</td></tr>
 <tr><td>store.ouninshop.com</td><td>后端（Shopify）</td><td>Shopify 商店</td></tr>
-<tr><td>www.ouninglobal.com</td><td>DNS</td><td>品牌官网 www</td></tr>
 </table>
 </div>
 
@@ -76,7 +73,7 @@ a:hover { text-decoration: underline; }
 <table>
 <tr><th>项目</th><th>内容</th></tr>
 <tr><td>生产域名</td><td>https://ouninshop.com</td></tr>
-<tr><td>自定义域名</td><td>ouninglobal.com</td></tr>
+<tr><td>自定义域名</td><td>ounsshop.com</td></tr>
 <tr><td>Zone ID</td><td>91403386245d57e972e35345052bba95</td></tr>
 <tr><td>Bot Fight Mode</td><td class="status-ok">✅ 已开启</td></tr>
 <tr><td>SSL/TLS</td><td class="status-ok">✅ 安全模式（Full）</td></tr>
@@ -93,7 +90,6 @@ a:hover { text-decoration: underline; }
 <h3>3.2 Headless 模式说明</h3>
 <p>当前 Shopify 已切换为 <strong>Headless（无头电商）模式</strong>：</p>
 <ul>
-<li>在线商店（online store）已关闭，访问会自动跳转到 oouninshop.com</li>
 <li>前端完全由自建静态站接管</li>
 <li>Shopify 仅作为后端服务（产品目录、购物车、结算、支付、订单管理、税务）</li>
 </ul>
@@ -135,7 +131,7 @@ a:hover { text-decoration: underline; }
 
 <h3>4.4 Google Search Console</h3>
 <p>登录地址：<a href="https://search.google.com/search-console">https://search.google.com/search-console</a></p>
-<p>验证域名：https://www.ouninglobal.com/</p>
+
 </div>
 
 <div class="section">
@@ -159,7 +155,6 @@ a:hover { text-decoration: underline; }
 <tr><td>总展示次数</td><td>16</td></tr>
 <tr><td>总点击次数</td><td>205</td></tr>
 <tr><td>平均 CTR</td><td>7.8%</td></tr>
-<tr><td>TOP 页面</td><td>首页（14次展示，152次点击）</td></tr>
 </table>
 
 <h3>5.3 销售数据（近30天，Shopify）</h3>
@@ -176,8 +171,6 @@ a:hover { text-decoration: underline; }
 <h2>六、域名与 DNS 配置</h2>
 <table>
 <tr><th>类型</th><th>名称</th><th>内容</th><th>说明</th></tr>
-<tr><td>A</td><td>ouninglobal.com</td><td>指向 Cloudflare Pages</td><td>品牌官网</td></tr>
-<tr><td>A</td><td>www</td><td>指向 Cloudflare Pages</td><td>www 版</td></tr>
 <tr><td>CNAME</td><td>store</td><td>指向 ouunin.myshopify.com</td><td>Shopify 商店</td></tr>
 </table>
 <p>主 DNS：Cloudflare | Zone ID：91403386245d57e972e35345052bba95</p>
@@ -231,7 +224,7 @@ a:hover { text-decoration: underline; }
 <h2>十、常用链接</h2>
 <table>
 <tr><th>服务</th><th>链接</th></tr>
-<tr><td>商店前台</td><td><a href="https://ouninshop.com">https://ouninshop.com</a></td></tr>
+<tr><td>商店前台</td><td><a href="https://ounsshop.com">https://ounsshop.com</a></td></tr>
 <tr><td>Shopify 后台</td><td><a href="https://admin.shopify.com">https://admin.shopify.com</a></td></tr>
 <tr><td>Cloudflare Dashboard</td><td><a href="https://dash.cloudflare.com">https://dash.cloudflare.com</a></td></tr>
 <tr><td>GitHub 仓库</td><td><a href="https://github.com/linoroven897-star/ounin">https://github.com/linoroven897-star/ounin</a></td></tr>
