@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OUNIN 独立站架构文档</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: #0d1117; color: #fff; padding: 40px 20px; line-height: 1.6; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { font-size: 36px; color: #D4A574; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 20px; }
+h2 { font-size: 24px; color: #D4A574; margin: 40px 0 20px; }
+h3 { font-size: 18px; color: #D4A574; margin: 30px 0 15px; }
+p { margin: 15px 0; color: #ccc; }
+table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+th, td { border: 1px solid #333; padding: 12px 15px; text-align: left; }
+th { background: #1a1f26; color: #D4A574; }
+tr:nth-child(even) { background: #161b22; }
+pre { background: #161b22; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 20px 0; border: 1px solid #333; }
+code { background: #161b22; padding: 2px 6px; border-radius: 4px; color: #D4A574; }
+.version { color: #888; font-size: 14px; margin-bottom: 30px; }
+.section { background: #161b22; border-radius: 12px; padding: 25px; margin: 20px 0; border: 1px solid #333; }
+.status-ok { color: #3fb950; }
+.status-warn { color: #d29922; }
+.status-bad { color: #f85149; }
+a { color: #58a6ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>OUNIN 独立站架构文档</h1>
+<p class="version">文档版本：2026-05-12 | 最后更新：MiniMax-M2.7</p>
+
+<div class="section">
+<h2>一、整体架构概览</h2>
+<p>OUNIN 独立站采用 <strong>前端与后端分离（Headless）</strong> 架构：</p>
+<pre>
+用户端
+├── https://ounin.pages.dev (Cloudflare Pages CDN)
+├── https://ouninglobal.com (Cloudflare DNS + Pages)
+└── https://store.ouninshop.com (Cloudflare DNS → Shopify)
+         ↓
+前端层：GitHub → Cloudflare Pages（纯 HTML/CSS/JS）
+         ↓
+后端层：Shopify（产品目录、订单、支付、税务）
+</pre>
+
+<h3>核心域名</h3>
+<table>
+<tr><th>域名</th><th>类型</th><th>说明</th></tr>
+<tr><td>ounin.pages.dev</td><td>前端（Cloudflare CDN）</td><td>主站入口</td></tr>
+<tr><td>ouninglobal.com</td><td>前端（Cloudflare DNS）</td><td>品牌官网</td></tr>
+<tr><td>store.ouninshop.com</td><td>后端（Shopify）</td><td>Shopify 商店</td></tr>
+<tr><td>www.ouninglobal.com</td><td>DNS</td><td>品牌官网 www</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>二、前端架构</h2>
+
+<h3>2.1 技术栈</h3>
+<table>
+<tr><th>组件</th><th>技术</th><th>说明</th></tr>
+<tr><td>语言</td><td>HTML5 + CSS3 + Vanilla JS</td><td>无框架、无 CDN 依赖</td></tr>
+<tr><td>源码托管</td><td>GitHub</td><td>linoroven897-star/ounin</td></tr>
+<tr><td>CDN 分发</td><td>Cloudflare Pages</td><td>自动部署，边缘节点</td></tr>
+<tr><td>图片存储</td><td>GitHub 仓库内</td><td>assets/images/</td></tr>
+</table>
+
+<h3>2.2 GitHub 仓库</h3>
+<p>仓库地址：<a href="https://github.com/linoroven897-star/ounin">https://github.com/linoroven897-star/ounin</a></p>
+<p>部署方式：Cloudflare Pages 监听 GitHub，每次 push 自动部署 ✅ 已启用</p>
+
+<h3>2.3 Cloudflare Pages 项目</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>生产域名</td><td>https://ounin.pages.dev</td></tr>
+<tr><td>自定义域名</td><td>ouninglobal.com</td></tr>
+<tr><td>Zone ID</td><td>91403386245d57e972e35345052bba95</td></tr>
+<tr><td>Bot Fight Mode</td><td class="status-ok">✅ 已开启</td></tr>
+<tr><td>SSL/TLS</td><td class="status-ok">✅ 安全模式（Full）</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>三、后端架构</h2>
+
+<h3>3.1 Shopify 商店</h3>
+<p>后台地址：<a href="https://admin.shopify.com">https://admin.shopify.com</a> → 登录后进入</p>
+<p>商店域名：ouunin.myshopify.com</p>
+
+<h3>3.2 Headless 模式说明</h3>
+<p>当前 Shopify 已切换为 <strong>Headless（无头电商）模式</strong>：</p>
+<ul>
+<li>在线商店（online store）已关闭，访问会自动跳转到 oounin.pages.dev</li>
+<li>前端完全由自建静态站接管</li>
+<li>Shopify 仅作为后端服务（产品目录、购物车、结算、支付、订单管理、税务）</li>
+</ul>
+
+<h3>3.3 Shopify 功能模块</h3>
+<table>
+<tr><th>模块</th><th>状态</th><th>说明</th></tr>
+<tr><td>产品目录</td><td class="status-ok">✅</td><td>5个产品，75个变体</td></tr>
+<tr><td>Checkout</td><td class="status-ok">✅</td><td>已配置，客户信息字段完整</td></tr>
+<tr><td>支付（Payments）</td><td class="status-warn">⚠️ 部分</td><td>PayPal 已接入（Partially active），Shopify Payments 未开通</td></tr>
+<tr><td>税务（Tax Services）</td><td class="status-ok">✅</td><td>已启用，支持13个国家/地区</td></tr>
+<tr><td>域名（Domains）</td><td class="status-ok">✅</td><td>4个域名全部 Connected</td></tr>
+<tr><td>邮件（Email）</td><td class="status-warn">⚠️</td><td>Email 登录已禁用</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>四、各管理后台登录方式</h2>
+
+<h3>4.1 Shopify 商店后台</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>后台地址</td><td>https://admin.shopify.com 或 https://ouunin.myshopify.com/admin</td></tr>
+<tr><td>登录方式</td><td>Email / 手机号 + 密码</td></tr>
+<tr><td>登录邮箱</td><td>ouunin2025@gmail.com</td></tr>
+</table>
+
+<h3>4.2 Cloudflare 仪表盘</h3>
+<table>
+<tr><th>项目</th><th>内容</th></tr>
+<tr><td>登录地址</td><td>https://dash.cloudflare.com</td></tr>
+<tr><td>接入域名</td><td>ounsshop.com（Zone ID: 91403386245d57e972e35345052bba95）</td></tr>
+<tr><td>主要功能</td><td>DNS 管理、SSL/TLS 配置、Pages 项目、安全设置</td></tr>
+</table>
+
+<h3>4.3 Google Analytics</h3>
+<p>登录地址：<a href="https://analytics.google.com">https://analytics.google.com</a></p>
+<p>追踪范围：全站流量、用户行为、转化追踪</p>
+
+<h3>4.4 Google Search Console</h3>
+<p>登录地址：<a href="https://search.google.com/search-console">https://search.google.com/search-console</a></p>
+<p>验证域名：https://www.ouninglobal.com/</p>
+</div>
+
+<div class="section">
+<h2>五、当前业务数据摘要</h2>
+<p>数据来源：2026-05-11 运营报告</p>
+
+<h3>5.1 流量（近90天，GA4）</h3>
+<table>
+<tr><th>指标</th><th>数值</th></tr>
+<tr><td>Sessions</td><td>295</td></tr>
+<tr><td>Total Users</td><td>6,487</td></tr>
+<tr><td>Engagement Rate</td><td>4.55%</td></tr>
+<tr><td>平均每次会话浏览页数</td><td>4.48</td></tr>
+<tr><td>跳出率</td><td>67.21%</td></tr>
+<tr><td>平均会话时长</td><td>2分19秒</td></tr>
+</table>
+
+<h3>5.2 搜索表现（近7天，GSC）</h3>
+<table>
+<tr><th>指标</th><th>数值</th></tr>
+<tr><td>总展示次数</td><td>16</td></tr>
+<tr><td>总点击次数</td><td>205</td></tr>
+<tr><td>平均 CTR</td><td>7.8%</td></tr>
+<tr><td>TOP 页面</td><td>首页（14次展示，152次点击）</td></tr>
+</table>
+
+<h3>5.3 销售数据（近30天，Shopify）</h3>
+<table>
+<tr><th>指标</th><th>数值</th></tr>
+<tr><td>Sessions</td><td>130</td></tr>
+<tr><td>Total Sales</td><td>$163 USD</td></tr>
+<tr><td>Orders</td><td>1</td></tr>
+<tr><td>Conversion Rate</td><td>0.76%</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>六、域名与 DNS 配置</h2>
+<table>
+<tr><th>类型</th><th>名称</th><th>内容</th><th>说明</th></tr>
+<tr><td>A</td><td>ouninglobal.com</td><td>指向 Cloudflare Pages</td><td>品牌官网</td></tr>
+<tr><td>A</td><td>www</td><td>指向 Cloudflare Pages</td><td>www 版</td></tr>
+<tr><td>CNAME</td><td>store</td><td>指向 ouunin.myshopify.com</td><td>Shopify 商店</td></tr>
+</table>
+<p>主 DNS：Cloudflare | Zone ID：91403386245d57e972e35345052bba95</p>
+</div>
+
+<div class="section">
+<h2>七、支付与税务配置</h2>
+<table>
+<tr><th>项目</th><th>状态</th><th>说明</th></tr>
+<tr><td>PayPal</td><td class="status-warn">⚠️ Partially Active</td><td>2% 手续费，Checkout 支付</td></tr>
+<tr><td>Shopify Payments</td><td class="status-bad">❌ 未开通</td><td>—</td></tr>
+<tr><td>Shopify Tax Services</td><td class="status-ok">✅ 已启用</td><td>支持13个国家/地区</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>八、运营注意事项</h2>
+
+<h3>8.1 已发现问题</h3>
+<table>
+<tr><th>问题</th><th>说明</th><th>状态</th></tr>
+<tr><td>钉钉机器人 Token 失效</td><td>通知无法送达，Token 已失效超过26天</td><td class="status-warn">⚠️ 待修复</td></tr>
+<tr><td>Email 登录禁用</td><td>Shopify 后台 Email 登录方式已禁用</td><td class="status-warn">⚠️ 需确认</td></tr>
+</table>
+
+<h3>8.2 日常维护检查清单</h3>
+<table>
+<tr><th>检查项</th><th>频率</th><th>工具</th></tr>
+<tr><td>网站是否可以正常访问</td><td>每天</td><td>浏览器直接访问</td></tr>
+<tr><td>是否有新订单</td><td>每天</td><td>Shopify 后台</td></tr>
+<tr><td>流量数据变化</td><td>每周</td><td>Google Analytics</td></tr>
+<tr><td>搜索排名变化</td><td>每周</td><td>Google Search Console</td></tr>
+<tr><td>SSL 证书状态</td><td>每周</td><td>Cloudflare 仪表盘</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>九、相关账号汇总</h2>
+<table>
+<tr><th>平台</th><th>账号/邮箱</th><th>备注</th></tr>
+<tr><td>Shopify</td><td>ouunin2025@gmail.com</td><td>商店后台</td></tr>
+<tr><td>Cloudflare</td><td>（需向用户确认）</td><td>DNS + Pages</td></tr>
+<tr><td>GitHub</td><td>linoroven897-star</td><td>源码仓库</td></tr>
+<tr><td>Google Analytics</td><td>（需向用户确认）</td><td>流量分析</td></tr>
+<tr><td>Google Search Console</td><td>（需向用户确认）</td><td>SEO</td></tr>
+<tr><td>PayPal</td><td>（需向用户确认）</td><td>收款</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>十、常用链接</h2>
+<table>
+<tr><th>服务</th><th>链接</th></tr>
+<tr><td>商店前台</td><td><a href="https://ounin.pages.dev">https://ounin.pages.dev</a></td></tr>
+<tr><td>Shopify 后台</td><td><a href="https://admin.shopify.com">https://admin.shopify.com</a></td></tr>
+<tr><td>Cloudflare Dashboard</td><td><a href="https://dash.cloudflare.com">https://dash.cloudflare.com</a></td></tr>
+<tr><td>GitHub 仓库</td><td><a href="https://github.com/linoroven897-star/ounin">https://github.com/linoroven897-star/ounin</a></td></tr>
+<tr><td>Google Analytics</td><td><a href="https://analytics.google.com">https://analytics.google.com</a></td></tr>
+<tr><td>Google Search Console</td><td><a href="https://search.google.com/search-console">https://search.google.com/search-console</a></td></tr>
+</table>
+</div>
+
+<p style="color:#666;margin-top:40px;border-top:1px solid #333;padding-top:20px;">
+本文档由 AI 根据 2026-05-12 当前状态生成，如有任何变更请手动更新。
+</p>
+</div>
+</body>
+</html>
